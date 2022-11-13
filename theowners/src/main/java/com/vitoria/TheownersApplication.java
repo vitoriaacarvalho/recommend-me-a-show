@@ -13,10 +13,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories("com.vitoria.repositories")
 @EntityScan("com.vitoria.models")
 @EnableEurekaClient
-public class ThecatsApplication {
+public class TheownersApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ThecatsApplication.class, args);
+		SpringApplication.run(TheownersApplication.class, args);
 	}
 
 }
