@@ -5,12 +5,15 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="user_profile")
@@ -29,7 +32,8 @@ public class UserProfile implements Serializable{
 	@OneToOne(mappedBy="userProfile")
 	private User user;
 	
-	@OneToMany(mappedBy="userProfile")
+	@JsonIgnore
+	@OneToMany(mappedBy="userProfile",fetch = FetchType.LAZY)
 	private List<Show> show;
 
 	public UserProfile() {

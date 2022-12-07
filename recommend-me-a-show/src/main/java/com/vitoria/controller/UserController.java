@@ -53,11 +53,11 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping
+	@PostMapping(value="insert")
 	public ResponseEntity<String> insert(@RequestBody User user){
-		User entity=repo.findByEmail(user.getEmail());
-		if(entity==null) {
-			repo.save(entity);
+		String entitysEmail=repo.findByEmail(user.getEmail());
+		if(entitysEmail==null) {
+			repo.save(user);
 			return ResponseEntity.status(HttpStatus.CREATED).body("USER SUCESSFULLY CREATED");
 		}else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("AN USER ASSOCIATED TO THIS EMAIL ALREADY EXISTS");
@@ -66,7 +66,7 @@ public class UserController {
 	
 	@PutMapping(value="/updateName/{id}")
 	public ResponseEntity<User> updateName(@PathVariable Integer id, @RequestBody User user){
-		User updatedName=user;
+		User updatedName=repo.findById(id).get();
 		updatedName.setName(user.getName());
 		repo.save(updatedName);
 		return ResponseEntity.ok().body(updatedName);
@@ -74,8 +74,8 @@ public class UserController {
 	
 	@PutMapping(value="/updatePassword/{id}")
 	public ResponseEntity<User> updatePassword(@PathVariable Integer id, @RequestBody User user){
-		User updatedPassword=user;
-		updatedPassword.setName(user.getPassword());
+		User updatedPassword=repo.findById(id).get();
+		updatedPassword.setPassword(user.getPassword());
 		repo.save(updatedPassword);
 		return ResponseEntity.ok().body(updatedPassword);
 	}
