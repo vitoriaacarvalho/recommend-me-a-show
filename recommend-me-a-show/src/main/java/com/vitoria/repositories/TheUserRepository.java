@@ -12,7 +12,8 @@ import com.vitoria.models.User;
 
 @Repository 
 @Transactional
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface TheUserRepository extends JpaRepository<User, Integer> {
 	@Query(value = "SELECT * FROM table_user WHERE email = :email", nativeQuery = true)
 	User findByEmail(@Param("email") String email);
+
 }

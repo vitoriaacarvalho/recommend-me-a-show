@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS `TABLE_USER`;
+
+CREATE TABLE  `TABLE_USER`(
+	`USER_NAME` varchar(250) NOT NULL,
+	`USER_EMAIL` varchar(250) NOT NULL,
+	`PASSWORD` varchar(250) NOT NULL,
+	`USER_ID` int AUTO_INCREMENT PRIMARY KEY,
+	`USER_PROFILE` varchar(250)
+);
+
+INSERT INTO `TABLE_USER` (`USER_NAME`, `USER_EMAIL`, `PASSWORD`, `USER_PROFILE`)
+VALUES ('vitória', 'vitoria@gmail.com', 'testing', 'testing');
