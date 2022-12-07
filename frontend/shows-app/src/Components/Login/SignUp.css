@@ -1,0 +1,56 @@
+body{
+    background-color: #4b558be5;
+}
+
+.central-box{
+    background-color: #282525;
+    width: 400px;
+    height: 300px;
+    margin: auto;
+    margin-top: 130px;
+    display: grid;
+    justify-content: center;
+    border-radius:  200px 100px;
+}
+
+.inputs{
+    display: grid;
+    justify-content: center;
+    margin-top: -20px;
+}
+.email{
+    width: 164px;
+    height: 20px;
+    border-radius: 5px;
+    border-color: #28252500;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.password{
+    width: 164px;
+    height: 20px;
+    border-radius: 5px;
+    border-color: #28252500;
+    margin-top: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.title{
+    font-family: 'Readex Pro', sans-serif;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    color: rgba(214, 214, 214, 0.815);
+}
+.question{
+    font-size: 12px;
+    margin-left: 14px;
+    color:  rgba(214, 214, 214, 0.815);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.link-sign-in{
+    text-decoration: none;
+    color: #939fe2;
+}
+.link-sign-in:hover{
+    color: #7584da;
+}
