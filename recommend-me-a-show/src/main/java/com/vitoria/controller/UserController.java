@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +14,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vitoria.dto.ResponseDto;
+import com.vitoria.dto.user.SignInDto;
+import com.vitoria.dto.user.SignInResponseDto;
+import com.vitoria.dto.user.SignUpDto;
 import com.vitoria.models.User;
 import com.vitoria.repositories.TheUserRepository;
+import com.vitoria.service.UserService;
 
 @RestController
 @RequestMapping(value="/users", produces="application/json")
@@ -24,6 +28,20 @@ public class UserController {
 	
 	@Autowired
 	private TheUserRepository repo;
+	@Autowired
+	private UserService userService;
+	
+	
+	@PostMapping(value="/signup")
+	public ResponseDto signUp(@RequestBody SignUpDto signUpDto) {
+		return userService.signUp(signUpDto);
+	}
+	
+	@PostMapping(value="/signin")
+	public SignInResponseDto signIn(@RequestBody SignInDto signInDto) {
+		return userService.signIn(signInDto);
+	}
+	
 	
 	@GetMapping
 	public ResponseEntity<List<User>> findAll(){
@@ -35,33 +53,6 @@ public class UserController {
 	public ResponseEntity<Optional<User>> findById(@PathVariable Integer id){
 		Optional<User> user=repo.findById(id);
 		return ResponseEntity.ok().body(user);
-	}
-	
-	@GetMapping(value="emails/{email}")
-	public ResponseEntity<User> doesEmailExist(User user){
-		String email=user.getEmail();
-		doesUserExist(email);
-		return ResponseEntity.ok().body(user);
-	}
-	
-	private boolean doesUserExist(String email) {
-		if (repo.findByEmail(email) != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-	
-	@PostMapping(value="insert")
-	public ResponseEntity<String> insert(@RequestBody User user){
-		String entitysEmail=repo.findByEmail(user.getEmail());
-		if(entitysEmail==null) {
-			repo.save(user);
-			return ResponseEntity.status(HttpStatus.CREATED).body("USER SUCESSFULLY CREATED");
-		}else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("AN USER ASSOCIATED TO THIS EMAIL ALREADY EXISTS");
-		}	
 	}
 	
 	@PutMapping(value="/updateName/{id}")
